@@ -1,0 +1,27 @@
+.mycontainer {
+  width: 300px;
+  height: 300px;
+  text-align: "center";
+  padding: 20px;
+}
+.contenant {
+  position: relative;
+  text-align: center;
+  color: rgb(3, 5, 22);
+}
+
+.texte_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -30%);
+}
+.text-title {
+  text-align: center;
+}
+.container {
+  background-color: rgba(247, 142, 4, 0.096);
+}
+.text-rating {
+  color: rgb(19, 74, 226);
+}
