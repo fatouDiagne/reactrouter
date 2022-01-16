@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Data } from './Data.js'
 import "../styles/style.css"
 import Box from '@mui/material/Box';
@@ -7,17 +7,19 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 const MovieList = () => {
-     const[title, setTitle]=useState("");
-    const[description, setDescription]= useState("");
+    const [title, setTitle]=useState("");
+    const [description, setDescription]= useState("");
     const [postUrl, setPostUrl] = useState("");
     const [rating, setRating] = useState("");
-    const [listData, setListData] = useState({
+    const [id, setId] = useState("");
+
+    /*const [listData, setListData] = useState({
         list:
         {
         title: "", description: "", postUrl: "", rating: ""
         }
     }
-    )
+    )*/
     const [searchkey, setSearchKey] = useState("");
     const searchChange = (e) => {
         setSearchKey(e.target.value)
@@ -34,10 +36,30 @@ const MovieList = () => {
     const ratingChange=(e)=>{
         setRating(e.target.value)
     }
+    const idChange = (e) => {
+        setId(e.target.value)
+    }
     const handleChange = async (e) => {
+
         e.preventDefault();
-        if (title,description,postUrl,rating) {
-            setListData({
+        if (id, title, description, postUrl, rating) {
+           
+           let  arr = Data.slice();
+            //Data = [...Data];
+           let  list = 
+           {
+                    id: id,
+                    title: title,
+                    description: description,
+                    postUrl: postUrl,
+                    rating:rating
+            }
+            arr.push(list);
+            //const newData = Data.concat(list)
+            //Data.concat(list)
+            console.log(arr)
+           /* setListData({
+                           
                 ...listData,
                     list: {
                     title: title,
@@ -45,8 +67,9 @@ const MovieList = () => {
                     postUrl: postUrl,
                     rating:rating
                 }
-            })
-            console.log(listData)
+                    
+            })*/
+            
         }
     }
     const filteredList=()=>{
@@ -57,9 +80,12 @@ const MovieList = () => {
             else if (films.title.toLowerCase().includes(searchkey.toLowerCase())) {
                 return films
             }
+            //copie tableau slice 
                 
             })
+    
     }
+    
    
     return (
         <div className="container">
@@ -98,7 +124,18 @@ const MovieList = () => {
                     noValidate
                     autoComplete="off"
                     >
-                <div>
+                    <div>
+                        <div>
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="ID"
+                            name={id}
+                            defaultValue="id"
+                            type="number"
+                            onChange={idChange}
+                            />
+                        </div>
                     <div>
                     <TextField
                     required
@@ -147,7 +184,7 @@ const MovieList = () => {
                     </div>
                     <div>
                              <Button variant="contained" type="submit" onClick={handleChange}>
-                                    Contained
+                                    Valider
                             </Button>
                         </div>
                         </div>
